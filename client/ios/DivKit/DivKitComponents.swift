@@ -191,17 +191,6 @@ public final class DivKitComponents {
     variablesStorage.changeEvents.addObserver { [weak self] event in
       self?.onVariablesChanged(event: event)
     }.dispose(in: disposePool)
-
-    #if os(iOS)
-    self.tooltipManager.setHandler { [weak self] in
-      switch $0.payload {
-      case let .divAction(params):
-        self?.actionHandler.handle(params: params, sender: nil)
-      default:
-        break
-      }
-    }
-    #endif
   }
 
   public func reset() {

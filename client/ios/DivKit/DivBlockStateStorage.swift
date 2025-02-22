@@ -32,16 +32,20 @@ public final class DivBlockStateStorage {
   public private(set) var states: BlocksState
   private var statesById: [IdAndCardId: ElementState] = [:]
 
-  private var focusedElement: FocusedElement = .none {
-    didSet {
-      isInputFocused = false
-    }
-  }
+  private var focusedElement: FocusedElement = .none
+//    {
+////    didSet {
+////      isInputFocused = false
+////    }
+//  }
 
   private let lock = AllocatedUnfairLock()
   private let stateUpdatesPipe = SignalPipe<ChangeEvent>()
-
+//<<<<<<< HEAD
+//
   private(set) var isInputFocused = false
+//=======
+//>>>>>>> parent of 3834a7e0b (Fixed focus in ios)
 
   var stateUpdates: Signal<ChangeEvent> {
     stateUpdatesPipe.signal
@@ -125,7 +129,7 @@ public final class DivBlockStateStorage {
   }
 
   func setInputFocused() {
-    isInputFocused = true
+//    isInputFocused = true
   }
 
   private func isFocusedInternal(checkedElement: FocusedElement) -> Bool {
