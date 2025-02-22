@@ -272,11 +272,11 @@ private final class TextInputBlockView: BlockView, VisibleBoundsTrackingLeaf {
     mask: MaskValidator?
   ) {
     self.typo = typo.with(alignment: textAlignment)
+    self.textValue = textValue
+    
     if let mask, let rawTextValue {
-      self.textValue = textValue
       setupMaskedViewModelIfNeeded(mask: mask, rawTextValue: rawTextValue)
     } else {
-      self.textValue = textValue
       let text: String = if let selectionItems = self.selectionItems {
         selectionItems.first { $0.value == textValue.value }?.text ?? ""
       } else {
@@ -389,6 +389,7 @@ private final class TextInputBlockView: BlockView, VisibleBoundsTrackingLeaf {
         DispatchQueue.main.async {
           self.setTextData(input)
           self.textValue.value = input
+          self.updateHintVisibility()
         }
       }.dispose(in: disposePool)
   }
